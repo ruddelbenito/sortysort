@@ -1,63 +1,61 @@
-function bubble() {
-    let sorted = nums;
-    let last = sorted.length - 1;
+function bubble(nums) {
+    let last = nums.length - 1;
 
     while (last >= 0) {
         for (let index = 0; index < last; index++) {
-            if (sorted[index] > sorted[index + 1]) {
-                let temp = sorted[index];
+            if (nums[index] > nums[index + 1]) {
+                let temp = nums[index];
 
-                sorted[index] = sorted[index + 1];
-                sorted[index + 1] = temp;
+                nums[index] = nums[index + 1];
+                nums[index + 1] = temp;
             }
         }
 
         last--;
     }
 
-    return sorted;
+    return nums;
 }
 
-function selection() {
-    let sorted = nums;
+function selection(nums) {
     let current = 0;
 
-    while (current < sorted.length) {
-        let min = sorted[current];
+    while (current < nums.length) {
+        let min = nums[current];
         let minPosition = current;
 
-        for (let index = current; index < sorted.length; index++) {
-            if (sorted[index] < min) {
-                min = sorted[index];
+        for (let index = current; index < nums.length; index++) {
+            if (nums[index] < min) {
+                min = nums[index];
                 minPosition = index;
             }
         }
 
-        let temp = sorted[current];
-        sorted[current] = min;
-        sorted[minPosition] = temp;
+        let temp = nums[current];
+        nums[current] = min;
+        nums[minPosition] = temp;
 
         current++;
     }
 
-    return sorted;
+    return nums;
 }
 
-let nums = [];
-let given = 100;
 
-// let userInput = prompt('Enter a number of integers to sort: ');
 
-for (let index = 0; index < given; index++) {
-    nums.push(Math.round(Math.random() * 100));
+function benchmarkSort(sortFunction, inputSize = 10, maxNumber = 100) {
+    let nums = [];
+    for (let index = 0; index < inputSize; index++) {
+        nums.push(Math.round(Math.random() * maxNumber));
+    }
+    let start = performance.now();
+
+    let sortedArray = sortFunction(nums);
+    console.log(sortedArray);
+    let duration = performance.now() - start;
+    console.log(`duration: ${duration} ms`);
 }
 
-console.log(nums);
 
-let start = performance.now();
-
-// console.log(bubble());
-console.log(selection());
-
-let duration = performance.now() - start;
-console.log(`duration: ${duration} ms`);
+benchmarkSort(bubble, 100);
+benchmarkSort(selection, 100);
