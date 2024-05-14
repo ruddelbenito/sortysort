@@ -1,6 +1,7 @@
 function bubble(nums) {
     let last = nums.length - 1;
 
+
     while (last >= 0) {
         for (let index = 0; index < last; index++) {
             if (nums[index] > nums[index + 1]) {
@@ -17,12 +18,15 @@ function bubble(nums) {
     return nums;
 }
 
+
 function selection(nums) {
     let current = 0;
 
     while (current < nums.length) {
         let min = nums[current];
         let minPosition = current;
+
+
 
         for (let index = current; index < nums.length; index++) {
             if (nums[index] < min) {
@@ -51,11 +55,32 @@ function benchmarkSort(sortFunction, inputSize = 10, maxNumber = 100) {
     let start = performance.now();
 
     let sortedArray = sortFunction(nums);
-    console.log(sortedArray);
     let duration = performance.now() - start;
-    console.log(`duration: ${duration} ms`);
+    console.log(`for input size: ${nums.length} algorithm duration: ${duration} ms`);
 }
 
 
-benchmarkSort(bubble, 100);
-benchmarkSort(selection, 100);
+const inputSizes = [
+    10,
+    100,
+    150,
+    1000,
+    1500,
+    10000,
+    15000,
+];
+
+
+const maxNumber = 500000;
+
+const sortFunctions = [
+    bubble,
+    selection,
+];
+
+sortFunctions.forEach(sortFunction => {
+    console.log(`testing performance of ${sortFunction.name}`)
+    inputSizes.forEach(inputSize => {
+        benchmarkSort(sortFunction, inputSize, maxNumber);
+    });
+});
