@@ -45,6 +45,34 @@ function selection(nums) {
     return nums;
 }
 
+// merge sort
+function merge(nums) {
+    // base case: if array is size 0 or 1, it is already sorted
+    if (nums.length === 0 || nums.length === 1) {
+        return nums;
+    }
+
+    pieces = splitArray(nums);
+    console.log(pieces);
+
+}
+
+function splitArray(nums) {
+    let midpoint = nums.length / 2;
+    console.log(`midpoint: ${midpoint}`);
+    // left
+    left = nums.slice(0, midpoint);
+    // right
+    right = nums.slice(midpoint, nums.length);
+
+    return [left, right];
+}
+
+function combine(arrays) {
+    result = [];
+
+    return result;
+}
 
 
 function benchmarkSort(sortFunction, inputSize = 10, maxNumber = 100) {
