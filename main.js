@@ -69,7 +69,39 @@ function splitArray(nums) {
 }
 
 function combine(arrays) {
-    result = [];
+    // if one of the two arrays are empty, return the other array
+    if (arrays[0].length === 0) {
+        return arrays[1];
+    }
+    if (arrays[1].length === 0) {
+        return arrays[0];
+    }
+
+    let result = [];
+    let leftPointer = 0;
+    let rightPointer = 0;
+
+    while (arrays[0].length < 0 && arrays[1].length < 0) {
+        if (arrays[0][leftPointer] < arrays[1][rightPointer]) {
+            result.push(arrays[0][leftPointer])
+            leftPointer++;
+        }
+        else {
+            result.push(arrays[1][rightPointer]);
+            rightPointer++;
+        }
+    }
+
+    // if after one array is empty, the other array still has content, dump the rest of
+    // the non-empty array into result
+
+    if (leftPointer < arrays[0].length - 1) {
+
+    }
+
+    if (rightPointer < arrays[1].length - 1) {
+
+    }
 
     return result;
 }
@@ -106,9 +138,11 @@ const sortFunctions = [
     selection,
 ];
 
-sortFunctions.forEach(sortFunction => {
-    console.log(`testing performance of ${sortFunction.name}`)
-    inputSizes.forEach(inputSize => {
-        benchmarkSort(sortFunction, inputSize, maxNumber);
-    });
-});
+// sortFunctions.forEach(sortFunction => {
+//     console.log(`testing performance of ${sortFunction.name}`)
+//     inputSizes.forEach(inputSize => {
+//         benchmarkSort(sortFunction, inputSize, maxNumber);
+//     });
+// });
+
+benchmarkSort(merge, 6, 10);
