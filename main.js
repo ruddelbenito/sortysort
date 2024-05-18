@@ -53,13 +53,20 @@ function merge(nums) {
     }
 
     pieces = splitArray(nums);
-    console.log(pieces);
+    console.log(`split:`)
+    console.log(pieces[0]);
+    console.log(pieces[1]);
+
+    left = merge(pieces[0]);
+    right = merge(pieces[1]);
+
+    return combine(pieces);
 
 }
 
 function splitArray(nums) {
     let midpoint = nums.length / 2;
-    console.log(`midpoint: ${midpoint}`);
+
     // left
     left = nums.slice(0, midpoint);
     // right
@@ -81,26 +88,27 @@ function combine(arrays) {
     let leftPointer = 0;
     let rightPointer = 0;
 
-    while (arrays[0].length < 0 && arrays[1].length < 0) {
+    while (leftPointer < arrays[0].length && rightPointer < arrays[1].length) {
         if (arrays[0][leftPointer] < arrays[1][rightPointer]) {
             result.push(arrays[0][leftPointer])
+
             leftPointer++;
         }
         else {
             result.push(arrays[1][rightPointer]);
+
             rightPointer++;
         }
     }
 
     // if after one array is empty, the other array still has content, dump the rest of
     // the non-empty array into result
-
-    if (leftPointer < arrays[0].length - 1) {
-
+    if (leftPointer < arrays[0].length) {
+        result = result.concat(arrays[0].slice(leftPointer, arrays[0].length));
     }
 
-    if (rightPointer < arrays[1].length - 1) {
-
+    if (rightPointer < arrays[1].length) {
+        result = result.concat(arrays[1].slice(rightPointer, arrays[1].length));
     }
 
     return result;
@@ -145,4 +153,5 @@ const sortFunctions = [
 //     });
 // });
 
-benchmarkSort(merge, 6, 10);
+console.log(merge([4, 3, 1, 8, 2]));
+// benchmarkSort(merge, 6, 10);
