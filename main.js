@@ -138,15 +138,12 @@ const maxNumber = 500000;
 const sortFunctions = [
     bubble,
     selection,
+    merge,
 ];
 
-// sortFunctions.forEach(sortFunction => {
-//     console.log(`testing performance of ${sortFunction.name}`)
-//     inputSizes.forEach(inputSize => {
-//         benchmarkSort(sortFunction, inputSize, maxNumber);
-//     });
-// });
-
-console.log(merge([4, 3, 1, 8, 2]));
-
-// benchmarkSort(merge, 6, 10);
+sortFunctions.forEach(sortFunction => {
+    console.log(`testing performance of ${sortFunction.name}`)
+    inputSizes.forEach(inputSize => {
+        benchmarkSort(sortFunction, inputSize, maxNumber);
+    });
+});
