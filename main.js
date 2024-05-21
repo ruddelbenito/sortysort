@@ -52,16 +52,12 @@ function merge(nums) {
         return nums;
     }
 
-    pieces = splitArray(nums);
-    console.log(`split:`)
-    console.log(pieces[0]);
-    console.log(pieces[1]);
+    let pieces = splitArray(nums);
 
-    left = merge(pieces[0]);
-    right = merge(pieces[1]);
+    let left = merge(pieces[0]);
+    let right = merge(pieces[1]);
 
-    return combine(pieces);
-
+    return combine([left, right]);
 }
 
 function splitArray(nums) {
@@ -91,12 +87,10 @@ function combine(arrays) {
     while (leftPointer < arrays[0].length && rightPointer < arrays[1].length) {
         if (arrays[0][leftPointer] < arrays[1][rightPointer]) {
             result.push(arrays[0][leftPointer])
-
             leftPointer++;
         }
         else {
             result.push(arrays[1][rightPointer]);
-
             rightPointer++;
         }
     }
@@ -154,4 +148,5 @@ const sortFunctions = [
 // });
 
 console.log(merge([4, 3, 1, 8, 2]));
+
 // benchmarkSort(merge, 6, 10);
