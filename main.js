@@ -72,37 +72,39 @@ function splitArray(nums) {
 }
 
 function merge(arrays) {
+    let leftArray = arrays[0];
+    let rightArray = arrays[1];
     // if one of the two arrays are empty, return the other array
-    if (arrays[0].length === 0) {
-        return arrays[1];
+    if (leftArray.length === 0) {
+        return rightArray;
     }
-    if (arrays[1].length === 0) {
-        return arrays[0];
+    if (rightArray.length === 0) {
+        return leftArray;
     }
 
     let result = [];
     let leftPointer = 0;
     let rightPointer = 0;
 
-    while (leftPointer < arrays[0].length && rightPointer < arrays[1].length) {
-        if (arrays[0][leftPointer] < arrays[1][rightPointer]) {
-            result.push(arrays[0][leftPointer])
+    while (leftPointer < leftArray.length && rightPointer < rightArray.length) {
+        if (leftArray[leftPointer] < rightArray[rightPointer]) {
+            result.push(leftArray[leftPointer])
             leftPointer++;
         }
         else {
-            result.push(arrays[1][rightPointer]);
+            result.push(rightArray[rightPointer]);
             rightPointer++;
         }
     }
 
     // if after one array is empty, the other array still has content, dump the rest of
     // the non-empty array into result
-    if (leftPointer < arrays[0].length) {
-        result = result.concat(arrays[0].slice(leftPointer, arrays[0].length));
+    if (leftPointer < leftArray.length) {
+        result = result.concat(leftArray.slice(leftPointer, leftArray.length));
     }
 
-    if (rightPointer < arrays[1].length) {
-        result = result.concat(arrays[1].slice(rightPointer, arrays[1].length));
+    if (rightPointer < rightArray.length) {
+        result = result.concat(rightArray.slice(rightPointer, rightArray.length));
     }
 
     return result;
