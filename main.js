@@ -46,7 +46,7 @@ function selection(nums) {
 }
 
 // merge sort
-function merge(nums) {
+function mergeSort(nums) {
     // base case: if array is size 0 or 1, it is already sorted
     if (nums.length === 0 || nums.length === 1) {
         return nums;
@@ -57,7 +57,7 @@ function merge(nums) {
     let left = merge(pieces[0]);
     let right = merge(pieces[1]);
 
-    return combine([left, right]);
+    return merge([left, right]);
 }
 
 function splitArray(nums) {
@@ -71,7 +71,7 @@ function splitArray(nums) {
     return [left, right];
 }
 
-function combine(arrays) {
+function merge(arrays) {
     // if one of the two arrays are empty, return the other array
     if (arrays[0].length === 0) {
         return arrays[1];
