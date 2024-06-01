@@ -140,11 +140,9 @@ const sortFunctions = [
     mergeSort,
 ];
 
-// sortFunctions.forEach(sortFunction => {
-//     console.log(`testing performance of ${sortFunction.name}`)
-//     inputSizes.forEach(inputSize => {
-//         benchmarkSort(sortFunction, inputSize, maxNumber);
-//     });
-// });
-
-console.log(mergeSort([55, 125, 13, 18, 26, 834, 324, 651, 2]))
+sortFunctions.forEach(sortFunction => {
+    console.log(`testing performance of ${sortFunction.name}`)
+    inputSizes.forEach(inputSize => {
+        benchmarkSort(sortFunction, inputSize, maxNumber);
+    });
+});
