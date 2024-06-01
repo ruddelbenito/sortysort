@@ -54,8 +54,8 @@ function mergeSort(nums) {
 
     let pieces = splitArray(nums);
 
-    let left = merge(pieces[0]);
-    let right = merge(pieces[1]);
+    let left = pieces[0];
+    let right = pieces[1];
 
     return merge([left, right]);
 }
@@ -74,6 +74,7 @@ function splitArray(nums) {
 function merge(arrays) {
     let leftArray = arrays[0];
     let rightArray = arrays[1];
+
     // if one of the two arrays are empty, return the other array
     if (leftArray.length === 0) {
         return rightArray;
@@ -140,7 +141,7 @@ const maxNumber = 500000;
 const sortFunctions = [
     bubble,
     selection,
-    merge,
+    mergeSort,
 ];
 
 sortFunctions.forEach(sortFunction => {
