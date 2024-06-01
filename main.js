@@ -97,11 +97,11 @@ function merge(arrays) {
     // if after one array is empty, the other array still has content, dump the rest of
     // the non-empty array into result
     if (leftArray.length > 0) {
-        result = result.concat(leftArray);
+        result = [...result, ...leftArray]
     }
 
     if (rightArray.length > 0) {
-        result = result.concat(rightArray);
+        result = [...result, ...rightArray];
     }
 
     return result;
@@ -140,9 +140,11 @@ const sortFunctions = [
     mergeSort,
 ];
 
-sortFunctions.forEach(sortFunction => {
-    console.log(`testing performance of ${sortFunction.name}`)
-    inputSizes.forEach(inputSize => {
-        benchmarkSort(sortFunction, inputSize, maxNumber);
-    });
-});
+// sortFunctions.forEach(sortFunction => {
+//     console.log(`testing performance of ${sortFunction.name}`)
+//     inputSizes.forEach(inputSize => {
+//         benchmarkSort(sortFunction, inputSize, maxNumber);
+//     });
+// });
+
+console.log(mergeSort([55, 125, 13, 18, 26, 834, 324, 651, 2]))
