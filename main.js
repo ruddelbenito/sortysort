@@ -54,8 +54,8 @@ function mergeSort(nums) {
 
     let pieces = splitArray(nums);
 
-    let left = pieces[0];
-    let right = pieces[1];
+    let left = mergeSort(pieces[0]);
+    let right = mergeSort(pieces[1]);
 
     return merge([left, right]);
 }
@@ -84,28 +84,24 @@ function merge(arrays) {
     }
 
     let result = [];
-    let leftPointer = 0;
-    let rightPointer = 0;
 
-    while (leftPointer < leftArray.length && rightPointer < rightArray.length) {
-        if (leftArray[leftPointer] < rightArray[rightPointer]) {
-            result.push(leftArray[leftPointer])
-            leftPointer++;
+    while (leftArray.length !== 0 && rightArray.length !== 0) {
+        if (leftArray[0] < rightArray[0]) {
+            result.push(leftArray.shift());
         }
         else {
-            result.push(rightArray[rightPointer]);
-            rightPointer++;
+            result.push(rightArray.shift());
         }
     }
 
     // if after one array is empty, the other array still has content, dump the rest of
     // the non-empty array into result
-    if (leftPointer < leftArray.length) {
-        result = result.concat(leftArray.slice(leftPointer, leftArray.length));
+    if (leftArray.length > 0) {
+        result = result.concat(leftArray);
     }
 
-    if (rightPointer < rightArray.length) {
-        result = result.concat(rightArray.slice(rightPointer, rightArray.length));
+    if (rightArray.length > 0) {
+        result = result.concat(rightArray);
     }
 
     return result;
