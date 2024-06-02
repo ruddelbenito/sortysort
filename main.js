@@ -74,10 +74,19 @@ function combine(arrays) {
     return result;
 }
 
-function quickSort(array, high, low) {
-    // base case: if given high <= low:
-    //  - array is empty
-    //  - array has been sorted through
+function quickSort(array, low, high) {
+    // base cases
+    // if only 1 item, it is already sorted
+    if (high - low == 1) {
+        return;
+    }
+    // if two items, if they are already sorted, return
+    if (high - low == 2 && array[low] < array[high]) {
+        return;
+    }
+
+    // after first iteration, if high is less than or equal to low,
+    // sorting has been completed
     if (high <= low) {
         return;
     }
@@ -85,6 +94,26 @@ function quickSort(array, high, low) {
     let pivot = array[low];
     let spot = low;
     let pointer = low + 1;
+
+    while (pointer < high) {
+        if (array[pointer] < pivot) {
+            spot++;
+
+            let temp = array[pointer];
+            array[pointer] = array[spot];
+            array[spot] = temp;
+        }
+
+        pointer++;
+    }
+
+    let temp = array[low];
+    array[low] = array[spot];
+    array[spot] = temp;
+
+    // recursion
+    quickSort(array, low, spot + 1);
+    quickSort(array, spot + 1, high);
 }
 
 function benchmarkSort(sortFunction, inputSize = 10, maxNumber = 100) {
@@ -124,3 +153,7 @@ const sortFunctions = [
 //         benchmarkSort(sortFunction, inputSize, maxNumber);
 //     });
 // });
+
+let test = [4, 2, 8, 9, 3];
+quickSort(test, 0, test.length);
+console.log(test);
