@@ -74,6 +74,18 @@ function combine(arrays) {
     return result;
 }
 
+function quickSort(array, high, low) {
+    // base case: if given high <= low:
+    //  - array is empty
+    //  - array has been sorted through
+    if (high <= low) {
+        return;
+    }
+
+    let pivot = array[low];
+    let spot = low;
+    let pointer = low + 1;
+}
 
 function benchmarkSort(sortFunction, inputSize = 10, maxNumber = 100) {
     let nums = [];
@@ -106,9 +118,9 @@ const sortFunctions = [
     selection,
 ];
 
-sortFunctions.forEach(sortFunction => {
-    console.log(`testing performance of ${sortFunction.name}`)
-    inputSizes.forEach(inputSize => {
-        benchmarkSort(sortFunction, inputSize, maxNumber);
-    });
-});
+// sortFunctions.forEach(sortFunction => {
+//     console.log(`testing performance of ${sortFunction.name}`)
+//     inputSizes.forEach(inputSize => {
+//         benchmarkSort(sortFunction, inputSize, maxNumber);
+//     });
+// });
