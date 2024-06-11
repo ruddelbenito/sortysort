@@ -46,20 +46,23 @@ function selection(nums) {
 }
 
 // merge sort
-function merge(nums) {
+function mergeSort(nums) {
     // base case: if array is size 0 or 1, it is already sorted
     if (nums.length === 0 || nums.length === 1) {
         return nums;
     }
 
-    pieces = splitArray(nums);
-    console.log(pieces);
+    let pieces = splitArray(nums);
 
+    let left = mergeSort(pieces[0]);
+    let right = mergeSort(pieces[1]);
+
+    return merge([left, right]);
 }
 
 function splitArray(nums) {
     let midpoint = nums.length / 2;
-    console.log(`midpoint: ${midpoint}`);
+
     // left
     left = nums.slice(0, midpoint);
     // right
@@ -68,8 +71,38 @@ function splitArray(nums) {
     return [left, right];
 }
 
-function combine(arrays) {
-    result = [];
+function merge(arrays) {
+    let leftArray = arrays[0];
+    let rightArray = arrays[1];
+
+    // if one of the two arrays are empty, return the other array
+    if (leftArray.length === 0) {
+        return rightArray;
+    }
+    if (rightArray.length === 0) {
+        return leftArray;
+    }
+
+    let result = [];
+
+    while (leftArray.length !== 0 && rightArray.length !== 0) {
+        if (leftArray[0] < rightArray[0]) {
+            result.push(leftArray.shift());
+        }
+        else {
+            result.push(rightArray.shift());
+        }
+    }
+
+    // if after one array is empty, the other array still has content, dump the rest of
+    // the non-empty array into result
+    if (leftArray.length > 0) {
+        result = [...result, ...leftArray]
+    }
+
+    if (rightArray.length > 0) {
+        result = [...result, ...rightArray];
+    }
 
     return result;
 }
@@ -104,6 +137,7 @@ const maxNumber = 500000;
 const sortFunctions = [
     bubble,
     selection,
+    mergeSort,
 ];
 
 sortFunctions.forEach(sortFunction => {
