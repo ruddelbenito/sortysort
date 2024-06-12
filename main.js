@@ -149,6 +149,10 @@ function quickSort(array, low, high) {
     quickSort(array, spot + 1, high);
 }
 
+function quick(array) {
+    return quickSort(array, 0, array.length);
+}
+
 function benchmarkSort(sortFunction, inputSize = 10, maxNumber = 100) {
     let nums = [];
     for (let index = 0; index < inputSize; index++) {
@@ -170,6 +174,7 @@ const inputSizes = [
     1500,
     10000,
     15000,
+    30000,
 ];
 
 
@@ -179,15 +184,12 @@ const sortFunctions = [
     bubble,
     selection,
     mergeSort,
+    quick,
 ];
 
-// sortFunctions.forEach(sortFunction => {
-//     console.log(`testing performance of ${sortFunction.name}`)
-//     inputSizes.forEach(inputSize => {
-//         benchmarkSort(sortFunction, inputSize, maxNumber);
-//     });
-// });
-
-let test = [4, 2, 8, 9, 3];
-quickSort(test, 0, test.length);
-console.log(test);
+sortFunctions.forEach(sortFunction => {
+    console.log(`testing performance of ${sortFunction.name}`)
+    inputSizes.forEach(inputSize => {
+        benchmarkSort(sortFunction, inputSize, maxNumber);
+    });
+});
