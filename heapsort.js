@@ -23,4 +23,23 @@ function insert(heap, value) {
     console.log(heap);
 }
 
-insert(testHeap, 3);
+function remove(heap) {
+    let last = heap.pop();
+    heap[0] = last;
+    let current = 0;
+    let cont = true;
+
+    while (cont) {
+        let leftChild = current * 2 + 1;
+        let rightChild = current * 2 + 2;
+
+        if (heap[current] > leftChild) {
+
+        }
+        else if (heap[current] > rightChild) {
+
+        }
+    }
+}
+
+remove(testHeap);
