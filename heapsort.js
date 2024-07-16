@@ -30,16 +30,30 @@ function remove(heap) {
     let cont = true;
 
     while (cont) {
+        console.log(`loop time baby`)
         let leftChild = current * 2 + 1;
         let rightChild = current * 2 + 2;
 
-        if (heap[current] > leftChild) {
+        if (Math.min(heap[leftChild], heap[rightChild]) < heap[current]) {
+            let swap;
 
+            if (heap[leftChild] < heap[rightChild]) {
+                swap = leftChild;
+            }
+            else {
+                swap = rightChild;
+            }
+
+            let temp = heap[current];
+            heap[current] = heap[swap];
+            heap[swap] = temp;
+            current = swap;
         }
-        else if (heap[current] > rightChild) {
-
+        else {
+            cont = false;
         }
     }
 }
 
 remove(testHeap);
+console.log(testHeap);
