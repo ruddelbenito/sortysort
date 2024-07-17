@@ -1,7 +1,6 @@
-let testHeap = [2, 3, 4, 5, 3, 7, 9,];
+let testHeap = [8, 11, 10, 15, 12, 5, 6, 7, 8, 5, 3, 1];
 
 function insert(heap, value) {
-    console.log(heap);
     heap.push(value);
 
     if (heap.length === 1) {
@@ -19,8 +18,6 @@ function insert(heap, value) {
         currentNode = parentNode;
         parentNode = Math.floor((currentNode - 1) / 2);
     }
-
-    console.log(heap);
 }
 
 function remove(heap) {
@@ -30,7 +27,6 @@ function remove(heap) {
     let cont = true;
 
     while (cont) {
-        console.log(`loop time baby`)
         let leftChild = current * 2 + 1;
         let rightChild = current * 2 + 2;
 
@@ -55,5 +51,13 @@ function remove(heap) {
     }
 }
 
-remove(testHeap);
-console.log(testHeap);
+function heapify(heap) {
+    let newArray = [];
+    for (let index = 0; index < heap.length; index++) {
+        insert(newArray, heap[index]);
+    }
+
+    console.log(newArray);
+}
+
+heapify(testHeap);
