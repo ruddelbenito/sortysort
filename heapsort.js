@@ -49,6 +49,8 @@ function remove(heap) {
             cont = false;
         }
     }
+
+    return last;
 }
 
 function heapify(heap) {
@@ -57,7 +59,14 @@ function heapify(heap) {
         insert(newArray, heap[index]);
     }
 
-    console.log(newArray);
+    return newArray;
 }
 
-heapify(testHeap);
+function heapsort(array) {
+    let sorted = [];
+
+    while (heap.length > 0) {
+
+    }
+}
+
