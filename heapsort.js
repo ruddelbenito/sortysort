@@ -63,10 +63,17 @@ function heapify(heap) {
 }
 
 function heapsort(array) {
+    let heapified = heapify(array);
     let sorted = [];
 
-    while (heap.length > 0) {
+    console.log(heapified);
 
+    while (heapified.length > 0) {
+        heapified.pop();
+        console.log(heapified);
     }
+
+    console.log(sorted);
 }
 
+heapsort([6, 3, 7, 9, 14, 21, 17]);
