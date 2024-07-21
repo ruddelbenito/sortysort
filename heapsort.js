@@ -7,7 +7,7 @@ function insert(heap, value) {
         return;
     }
 
-    currentNode = testHeap.length - 1;
+    currentNode = heap.length - 1;
     parentNode = Math.floor((currentNode - 1) / 2);
 
     while (heap[currentNode] < heap[parentNode]) {
