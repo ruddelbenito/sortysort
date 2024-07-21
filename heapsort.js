@@ -1,5 +1,3 @@
-let testHeap = [8, 11, 10, 15, 12, 5, 6, 7, 8, 5, 3, 1];
-
 function insert(heap, value) {
     heap.push(value);
 
@@ -22,9 +20,17 @@ function insert(heap, value) {
 
 function remove(heap) {
     let last = heap.pop();
-    heap[0] = last;
     let current = 0;
-    let cont = true;
+    let cont = false;
+    let removed = heap[0];
+
+    if (heap.length !== 0) {
+        heap[0] = last;
+        cont = true;
+    }
+
+
+
 
     while (cont) {
         let leftChild = current * 2 + 1;
@@ -50,7 +56,7 @@ function remove(heap) {
         }
     }
 
-    return last;
+    return removed;
 }
 
 function heapify(heap) {
@@ -66,14 +72,14 @@ function heapsort(array) {
     let heapified = heapify(array);
     let sorted = [];
 
-    console.log(heapified);
-
     while (heapified.length > 0) {
-        heapified.pop();
-        console.log(heapified);
+        let value = remove(heapified);
+        sorted.push(value);
     }
 
-    console.log(sorted);
+    return sorted;
 }
 
-heapsort([6, 3, 7, 9, 14, 21, 17]);
+let test = [5, 13, 2, 21, 193];
+
+console.log(heapsort(test));
