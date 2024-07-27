@@ -19,33 +19,46 @@ function insert(heap, value) {
 }
 
 function remove(heap) {
-    let last = heap.pop();
-    let current = 0;
-    let cont = false;
-    let removed = heap[0];
-
-    if (heap.length !== 0) {
-        heap[0] = last;
-        cont = true;
+    if (heap.length === 0) {
+        return;
     }
 
+    let smallest = heap[0];
+    let last = heap.pop();
+    let current = 0;
+
+    if (heap.length === 0) {
+        return smallest;
+    }
+
+    let cont = true;
+    heap[current] = last;
 
 
 
     while (cont) {
         let leftChild = current * 2 + 1;
         let rightChild = current * 2 + 2;
+        let swap = -1;
 
-        if (Math.min(heap[leftChild], heap[rightChild]) < heap[current]) {
-            let swap;
+        if (heap[leftChild] && heap[rightChild]) {
+            if (Math.min(heap[leftChild], heap[rightChild]) < heap[current]) {
+                let swap;
 
-            if (heap[leftChild] < heap[rightChild]) {
-                swap = leftChild;
+                if (heap[leftChild] <= heap[rightChild]) {
+                    swap = leftChild;
+                }
+                else {
+                    swap = rightChild;
+                }
             }
-            else {
-                swap = rightChild;
-            }
+        }
 
+        if (heap[leftChild] && heap[leftChild] < heap[current]) {
+            swap = leftChild;
+        }
+
+        if (swap !== -1) {
             let temp = heap[current];
             heap[current] = heap[swap];
             heap[swap] = temp;
@@ -56,11 +69,12 @@ function remove(heap) {
         }
     }
 
-    return removed;
+    return smallest;
 }
 
 function heapify(heap) {
     let newArray = [];
+
     for (let index = 0; index < heap.length; index++) {
         insert(newArray, heap[index]);
     }
@@ -79,7 +93,3 @@ function heapsort(array) {
 
     return sorted;
 }
-
-let test = [5, 13, 2, 21, 193];
-
-console.log(heapsort(test));
